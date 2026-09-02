@@ -1,6 +1,9 @@
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
 EAPI=8
 
-inherit flag-o-matic multilib
+inherit flag-o-matic
 
 DESCRIPTION="SQLite odbc interface driver"
 HOMEPAGE="http://www.ch-werner.de/sqliteodbc/"
@@ -9,12 +12,10 @@ SRC_URI="http://www.ch-werner.de/sqliteodbc/sqliteodbc-${PV}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="winterface xml2"
 
 RDEPEND="
 	dev-db/sqlite
 	dev-db/libiodbc
-	xml2? ( app-text/xml2 )
 "
 DEPEND="
 	${RDEPEND}
@@ -28,8 +29,6 @@ src_configure()
 		--cache-file="${WORKDIR}"/config.cache
 		--sysconfdir="${EPREFIX}"/etc/${PN}
 		--enable-shared
-		--prefix="${D}/usr"
-		$(use_enable winterface winterface)
 	)
 
 	econf "${myeconfargs[@]}"
